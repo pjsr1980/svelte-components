@@ -26,7 +26,7 @@
 <div>
 
     <div class="icon">
-        <Icon name="print" fill />
+        <Icon name="thumb_up_off" />
     </div>
 
     <label for="id1">Vertical</label>
