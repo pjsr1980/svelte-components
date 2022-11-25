@@ -1,10 +1,10 @@
 <!-- Script -->
 <script lang="ts">
     import { getContext } from 'svelte';
-    import { CONTENT } from './TabContent.svelte';
-    import type { TabContext } from './TabContent.svelte'
+    import { CONTEXT } from './TabCtrl.svelte';
+    import type { TabContext } from './TabCtrl.svelte'
     
-    const { registerTab, selectTab, selTab } = getContext<TabContext>(CONTENT);
+    const { registerTab, selectTab, selTab } = getContext<TabContext>(CONTEXT);
 
     export let tab : any;
     registerTab(tab);

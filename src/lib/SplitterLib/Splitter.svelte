@@ -10,7 +10,7 @@
     export let minSize2 = '0';
     export let isVertical = false;
     export let isSwap = false;
-    export let onUpdate = () => {}
+    export let onResize = () => {}
 
     onMount(() => {
         ro = new ResizeObserver(entries => {
@@ -63,7 +63,7 @@
             size1 = pt + '%';
             size2 = (100 - pt) + '%';
         }
-        onUpdate();
+        onResize();
     }
 
     const onMouseUp = (e : MouseEvent) => {
@@ -71,10 +71,10 @@
             e.preventDefault();
             if (e.button !== 0) return;
         }
-        onUpdate();
         window.removeEventListener('mousemove', onMouseMove);
         window.removeEventListener('mouseup', onMouseUp);
         moving = false;
+        onResize();
     }
 
     let md: any;

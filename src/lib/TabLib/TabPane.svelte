@@ -1,9 +1,9 @@
 <!-- Script -->
 <script lang="ts">
     import { getContext } from 'svelte';
-    import { CONTENT } from './TabContent.svelte';
-    import type { TabContext } from './TabContent.svelte';
-    const { registerPane, selPane } = getContext<TabContext>(CONTENT);
+    import { CONTEXT } from './TabCtrl.svelte';
+    import type { TabContext } from './TabCtrl.svelte';
+    const { registerPane, selPane } = getContext<TabContext>(CONTEXT);
 
     export let pane: any;
     registerPane(pane);

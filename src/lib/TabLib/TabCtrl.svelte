@@ -10,7 +10,7 @@
         selPane: Writable<null>;
     };
 
-    export const CONTENT = {};
+    export const CONTEXT = {};
 </script>
 
 <!-- Script -->
@@ -36,7 +36,7 @@
     }
     export const getSelect = () : any => { return $selTab; }
 
-    setContext<TabContext>(CONTENT, {
+    setContext<TabContext>(CONTEXT, {
         registerTab: (tab: any) => {
             tabs.push(tab);
             selTab.update(current => current || tab);

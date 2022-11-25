@@ -1,10 +1,13 @@
 
-<script>
-    import AceEditor from "$lib/AceLib/AceEditor.svelte";
-    import Example from "$lib/TabLib/Example.svelte";
+<script lang="ts">
     import Splitter from "$lib/SplitterLib/Splitter.svelte";
+    import TabExample from "$lib/TabLib/TabExample.svelte";
+    import AceEditor from "$lib/AceLib/AceEditor.svelte";
     import Icon from "$lib/IconLib/Icon.svelte";
 
+    import { TreeNode, TreeCtrl } from "$lib";
+    import type { MenuItem, NodeBase } from "$lib/TreeLib/TreeNode";
+ 
     let isSwap = false;
     let isVertical = false;
 
@@ -12,16 +15,60 @@
         fontSize: 16,
    }
     
-
+    let editor : AceEditor;
     let value = `let aux = function() {
     return 5 + 25n * 3;
 }
 `;
-    
+    function onResize() {
+        if(editor) {
+            editor.getEditor().resize();
+        }
+    }
+
+    function itemDoubleClick(evt: CustomEvent) {
+        evt.detail.setRename(evt.detail.item);
+    }
+
+    function itemMarked(evt: CustomEvent) {
+        let d = evt.detail;
+        d.setMarked(!d.marked);
+    }
+
+    let root = TreeNode.newRoot();
+    TreeNode.newField(root, "Folder 1", "folder", [
+        TreeNode.newField(null, "Folder 1.1", "folder", [], [
+            TreeNode.newFile(null, "File 1.1", "txt"),
+            TreeNode.newFile(null, "File 1.2", "njs")    
+        ])
+    ], [
+        TreeNode.newFile(null, "File 1", "txt"),
+        TreeNode.newFile(null, "File 2", "njs")
+    ]);
+    root.getItemMenu = (item: NodeBase) => {
+        let r: MenuItem[] = [
+            {
+                text: "Command 1",
+                icon: "folder",
+                cmd: "cmd-1"
+            },
+            {
+                text: ""
+            },
+            {
+                text: "Command 2",
+                icon: "folder",
+                cmd: "cmd-1"
+            }
+
+        ];
+        return r;
+    }
+
 
 </script>
 
-<h1>Welcome @pjsr/svelte-components</h1>
+<h1>@pjsr/svelte-components</h1>
 
 <div>
 
@@ -37,9 +84,15 @@
 </div>
 
 <div class="pane">
-    <Splitter isVertical={isVertical} isSwap={isSwap} minSize1="50px">
-        <AceEditor slot="1" bind:value={value} options={options}></AceEditor>
-        <Example slot="2"></Example>
+    <Splitter isVertical={isVertical} isSwap={isSwap} minSize1="50px" {onResize}>
+        <!-- 
+            <TabExample slot="1"></TabExample>
+        -->
+        <TreeCtrl slot="1" title="Test Tree" root={root}
+            on:itemDoubleClick={itemDoubleClick}
+            on:itemMarked={itemMarked}
+        />
+        <AceEditor slot="2" bind:this={editor} bind:value={value} options={options}></AceEditor>
     </Splitter>
 </div>
 

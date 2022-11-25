@@ -16,6 +16,12 @@
     export let options = {};
     export let readonly = false;
 
+    export function onResize() {
+        if(editor) {
+            editor.resize();
+        }
+    }
+
     export function getEditor() {
          return editor;
     }

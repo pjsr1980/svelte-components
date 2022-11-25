@@ -1,6 +1,6 @@
 
 <script>
-    import TabContent from "./TabContent.svelte";
+    import TabCtrl from "./TabCtrl.svelte";
     import TabHeader from "./TabHeader.svelte";
     import TabName from "./TabName.svelte";
     import TabPane from "./TabPane.svelte";
@@ -21,7 +21,7 @@
     ]
 </script>
 
-<TabContent>
+<TabCtrl>
     <TabHeader>
         {#each tabs as tab}
             <TabName tab={tab}>
@@ -35,4 +35,4 @@
             {tab.text}
         </TabPane>
     {/each}
-</TabContent>
+</TabCtrl>
