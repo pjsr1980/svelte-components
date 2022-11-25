@@ -4,8 +4,17 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<script defer src="%sveltekit.assets%/ace/ace.js"></script>
+		
+		<link defer rel="stylesheet" href="%sveltekit.assets%/highlight/styles/xcode.min.css">
+		<script defer src="%sveltekit.assets%/highlight/highlight.min.js"></script>
+		<script defer src="%sveltekit.assets%/mathjax/tex-mml-svg.js"></script>
+		<script defer src="%sveltekit.assets%/markdownit/markdown-it.min.js"></script>
+		<script defer src="%sveltekit.assets%/markdownit/markdown-it-emoji.min.js"></script>
+		<script defer src="%sveltekit.assets%/markdownit/markdown-it-footnote.min.js"></script>
+
 		%sveltekit.head%
-		<script src="/ace/ace.js"></script>
 	</head>
 	<body>
 		<div>%sveltekit.body%</div>

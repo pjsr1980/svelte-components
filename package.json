@@ -29,10 +29,6 @@
 		"svelte",
 		"components"
 	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/pjsr1980/svelte-components.git"
-	},
-	"author": "Pedro Ribeiro",
+	"author": "Pedro Ribeiro (pjsr1980@gmail.com)",
 	"license": "ISC"
 }

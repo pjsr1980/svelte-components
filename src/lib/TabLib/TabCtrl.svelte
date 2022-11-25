@@ -18,8 +18,8 @@
     import { writable } from 'svelte/store';
     import { setContext, onDestroy } from 'svelte';
 
-    export let colorSel = "red";
-    export let colorText = "black";
+    export let colorSel = "rgb(100, 100, 240)";
+    export let colorText = "rgb(100, 100, 100)";
 
     export let onTabSel = (tab: any) => {};
     export const tabs: any[] = [];

@@ -1,5 +1,5 @@
+<!-- Script -->
 <script lang="ts">
-
     import { createEventDispatcher, tick, onMount, onDestroy } from "svelte";
     
     const EDITOR_ID = `ace-editor-div:${Math.floor(Math.random() * 10000000000)}`;
@@ -15,6 +15,7 @@
     export let width = "100%";
     export let options = {};
     export let readonly = false;
+
 
     export function onResize() {
         if(editor) {
@@ -52,7 +53,7 @@
     });
 
     onMount(function () {
-        if(ace) {
+        if(window.ace) {
             lang = lang || "text";
             theme = theme || "chrome";
             editor = ace.edit(EDITOR_ID);
@@ -186,6 +187,13 @@
     }
 </script>
 
+<!-- Elements -->
 <div style="width:{px(width)};height:{px(height)}">
     <div id={EDITOR_ID} style="width:{px(width)};height:{px(height)}" />
+    <div></div>
 </div>
+
+<!-- Styles -->
+<style>
+    
+</style>

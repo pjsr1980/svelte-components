@@ -15,6 +15,8 @@ import Splitter from "./SplitterLib/Splitter.svelte";
 import * as TreeNode from "./TreeLib/TreeNode";
 import TreeCtrl from "./TreeLib/TreeCtrl.svelte";
 
+import Markdown from "./MarkdownLib/Markdown.svelte";
+
 //=========================================================
 export { Icon }
 
@@ -31,5 +33,7 @@ export { Splitter }
 
 export { TreeNode }
 export { TreeCtrl }
+
+export { Markdown }
 
 //=========================================================

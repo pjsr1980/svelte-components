@@ -5,7 +5,8 @@
     import AceEditor from "$lib/AceLib/AceEditor.svelte";
     import Icon from "$lib/IconLib/Icon.svelte";
 
-    import { TreeNode, TreeCtrl } from "$lib";
+    import { TreeNode, TreeCtrl, Markdown,
+        TabCtrl, TabHeader, TabName, TabPane } from "$lib";
     import type { MenuItem, NodeBase } from "$lib/TreeLib/TreeNode";
  
     let isSwap = false;
@@ -65,6 +66,26 @@
         return r;
     }
 
+    let text = `## Olá Mundo!
+\`\`\`ts
+let i = function(aux: string) {
+    return 5 * 5;
+}
+
+let text = "Isto é  texto!";
+
+\`\`\`
+
+> Isto é texto [com link](https://www.google.com) ;)
+
+This is an example of how to create a footnote[^1] in Markdown.
+[^1]: First Footnote
+
+\`$ [ x^n + y^n = z^n ] $\`
+\`$ x^2 + y^3 = z^n $\`
+
+`;
+
 
 </script>
 
@@ -92,7 +113,20 @@
             on:itemDoubleClick={itemDoubleClick}
             on:itemMarked={itemMarked}
         />
-        <AceEditor slot="2" bind:this={editor} bind:value={value} options={options}></AceEditor>
+        <TabCtrl slot="2">
+            <TabHeader>
+                <TabName tab=1>Markdown</TabName>
+                <TabName tab=2>Ace Editor</TabName>
+            </TabHeader>
+
+            <TabPane pane=1>
+                <Markdown text={text}></Markdown>
+            </TabPane>
+
+            <TabPane pane=2>
+                <AceEditor bind:this={editor} bind:value={value} options={options}></AceEditor>
+            </TabPane>
+        </TabCtrl>
     </Splitter>
 </div>
 
