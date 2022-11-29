@@ -27,7 +27,7 @@
     on:blur={() => console.log('blur')}
     width='100%'
     height='300px'
-    lang="pegjs"
+    lang="js"
     theme="one_dark"
     value={text} 
     options= {options}

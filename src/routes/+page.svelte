@@ -14,6 +14,7 @@
 
     let options = {
         fontSize: 16,
+        showLineNumbers: true
    }
     
     let editor : AceEditor;
@@ -83,6 +84,11 @@ This is an example of how to create a footnote[^1] in Markdown.
 
 \`$ [ x^n + y^n = z^n ] $\`
 \`$ x^2 + y^3 = z^n $\`
+
+> bvds hg
+> dgfhdfth fd
+>
+> gdhfsh tdhtgfr 
 
 `;
 

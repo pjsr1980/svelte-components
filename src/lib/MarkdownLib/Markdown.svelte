@@ -93,8 +93,8 @@
 </script>
 
 <!-- Elements -->
-<div class="md-panel" style="height: {height}">
-    <div class="md-content" bind:this={content}>
+<div class="markdown-panel" style="height: {height}">
+    <div class="markdown-body" bind:this={content}>
         {#if browser}
             {@html $html}
         {/if}
@@ -103,14 +103,13 @@
 
 <!-- Styles -->
 <style>
-.md-panel {
+.markdown-panel {
     width: 100%;
     max-width: 900px;
     padding: 0;
     margin: 0;
     overflow: auto;
 
-    font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: transparent;
     -webkit-text-size-adjust: 100%;
     -webkit-font-feature-settings: "kern" 1;
@@ -119,4 +118,19 @@
     font-feature-settings: "kern" 1;
     font-kerning: normal;
 }
+
+.markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
+
 </style>
