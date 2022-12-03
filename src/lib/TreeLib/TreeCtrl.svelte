@@ -8,7 +8,7 @@ events:
     on:itemDoubleClick  e.detail -> { item }
     on:itemRename       e.detail -> { item, value }
 =====================================================*/
-    import type { MenuItem, NodeBase, NodeField, NodeFile, NodeRoot } from "./TreeNode";
+    import type { NodeBase, NodeField, NodeFile, NodeRoot, MenuItem } from "./TreeNode";
     import type { Writable } from 'svelte/store';
     export type TreeContext = {
         root: NodeRoot;
@@ -34,6 +34,7 @@ events:
     import TreeItem from "./TreeItem.svelte";
     import TreeMenu from "./TreeMenu.svelte";
     import Icon from '../IconLib/Icon.svelte';
+    import { NodeType } from "./TreeNode";
 
     const dispatch = createEventDispatcher();
 
@@ -41,7 +42,7 @@ events:
     export const getSelectedItem = function() { return _selectedItem; }
     export const getMarkedItems  = function() { return _markedItems; }
     export const getRenameItem   = function() { return _renameItem; }
-    export const getVariables    = function() { return _variables; }
+    //export const getVariables    = function() { return _variables; }
     export const getTreeMenu     = function() { return _treeMenu; }
     export const updateTree      = function() {
         if(root) {
@@ -65,6 +66,25 @@ events:
 
     export let root: NodeRoot;
     export let title: string = '';
+    export let txtSize      = "12pt";
+    export let colorBg      = "transparent";
+    export let colorHover   = "rgb(50, 100, 240)";
+    export let colorTxt     = "rgb(100, 100, 100)"; 
+    export let colorTxtSel  = "rgb(170, 130, 100)";
+    export let colorBgSel   = "rgb(240, 240, 240)";
+
+    $: css_variables = watchVariables(txtSize, colorBg, colorHover, colorTxt, colorTxtSel, colorBgSel);
+    function watchVariables(st: string, cb:string, ch:string, ct:string, cs:string, bs:string) {
+        let r = "--txt-size:" + st + ";";
+        r += "--color-bg:" + cb + ";";
+        r += "--color-hover:" + ch + ";";
+        r += "--color-txt:" + ct + ";";
+        r += "--color-txt-sel:" + cs + ";";
+        r += "--color-bg-sel:" + bs + ";";
+        r += "--color-txt-marked:" + ch + ";"
+        r += "--color-bg-marked:" + bs + ";"
+        return r;
+    }
 
     let _renameItem = writable<NodeField|NodeFile|null>(null);
     let _selectedItem = writable<NodeBase|null>(null);
@@ -80,20 +100,7 @@ events:
         items: [], 
         visible: false 
     });
-    let _variables = writable({
-        "text-size":        '12pt',
-        "color-bg":         'transparent',
-        "color-hover":      'rgb(50, 50, 240)',
-
-        "color-txt":        'rgb(100, 100, 100)',
-        "color-txt-bg":     'rgb(255, 255, 255)',
-
-        "color-txt-sel":    'rgb(200, 180, 100)',
-        "color-bg-sel":     'rgb(240, 240, 240)',
-        
-        "color-txt-marked": 'rgb(255, 130, 130)',
-        "color-bg-marked":  'rgb(240, 240, 240)',
-    });
+    let _title_hover = false;
 
     setContext(CONTEXT, {
         root: root,
@@ -127,15 +134,39 @@ events:
         on_right_click();
     }
 
-    $: css_variables = Object.entries($_variables).map(
-        ([key,val]) => `--${key}:${val}`
-    ).join(';');
+    function expand_all(node: NodeBase) {
+        if(node.type === NodeType.ROOT) {
+            (node as NodeRoot).childs.forEach((nd) => {
+                expand_all(nd);
+            })
+        }
+        else if(node.type === NodeType.FIELD) {
+            (node as NodeField).expanded = true;
+            (node as NodeField).childs.forEach((nd) => {
+                expand_all(nd);
+            })
+        }
+    }
+
+    function compress_all(node: NodeBase) {
+        if(node.type === NodeType.ROOT) {
+            (node as NodeRoot).childs.forEach((nd) => {
+                compress_all(nd);
+            })
+        }
+        else if(node.type === NodeType.FIELD) {
+            (node as NodeField).expanded = false;
+            (node as NodeField).childs.forEach((nd) => {
+                compress_all(nd);
+            })
+        }
+    }
 
     $: has_title = title.trim().length > 0;
 </script>
 
 <!-- Elements -->
-<div class="tree" 
+<div class="pane" 
     on:contextmenu|stopPropagation|preventDefault="{on_contextmenu}"
     on:click|stopPropagation="{on_click}"
     on:keydown={()=>{}}
@@ -143,10 +174,24 @@ events:
     style={css_variables}
 >
     {#if has_title}
-        <div class="title user-select-none">
+        <div class="title user-select-none" 
+            on:mouseenter={()=>{_title_hover=true}}
+            on:mouseleave={()=>{_title_hover=false}}>
             <slot name="title">
-                <Icon name="database" size="calc(1.15 * var(--text-size))"/>
-                <span class="title-text">{title}</span>
+                <div>
+                    <Icon name="database" size="calc(1.15 * var(--text-size))"/>
+                    <span class="title-text">{title}</span>
+                </div>
+                <div class="title-menu">
+                    {#if _title_hover}
+                    <div class="title-menu-item" on:click={()=>{compress_all(root)}} on:keydown={()=>{}}>
+                        <Icon name="compress" size="calc(1.1 * var(--text-size))"/>
+                    </div>
+                    <div class="title-menu-item" on:click={()=>{expand_all(root)}} on:keydown={()=>{}}>
+                        <Icon name="expand" size="calc(1.1 * var(--text-size))"/>
+                    </div>
+                    {/if}
+                </div>
             </slot>
         </div>
     {/if}
@@ -188,19 +233,21 @@ events:
 
 <!-- Styles -->
 <style>
-    .tree {
+    .pane {
         margin: 0;
         padding: 0;
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        overflow: auto;
         background-color: var(--color-bg);
     }
 
     .title {
+        display: flex;
         margin: 0;
-        padding: calc(0.2 * var(--text-size));
-        width: 100%;
+        padding: calc(0.3 * var(--txt-size));
+        height: calc(1.2 * var(--txt-size));
+        width: calc(100% - 2 * 0.3 * var(--txt-size));
         font-size: var(--text-size);
         color: var(--color-hover);
         background-color: var(--color-bg-sel);
@@ -223,6 +270,25 @@ events:
         font-size: var(--txt-size);
         color: var(--color-txt);
         background-color: var(--color-bg-sel);
+    }
+
+    .title-menu {
+        display: flex;
+        margin-right: calc(0.3 * var(--txt-size));
+        margin-left: auto;
+    }
+
+    .title-menu-item {
+        margin: 0px;
+        padding: 0px;
+        color: var(--color-txt);
+        border: 1px solid var(--color-bg-sel);
+    }
+
+    .title-menu-item:hover {
+        color: var(--color-hover);
+        border: 1px solid var(--color-txt);
+        border-radius: 4px;
     }
 
     ul {

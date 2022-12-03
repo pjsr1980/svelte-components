@@ -32,10 +32,10 @@
 <style>
     div {
         margin: 4px 0 0px 4px;
-        padding: 0.4rem;
-        font-size: 1rem;
+        padding: calc(0.3 * var(--txt-size));
+        font-size: var(--txt-size);
         font-weight: normal;
-        color: var(--color-text);
+        color: var(--color-txt);
         background-color: transparent;
         border-top-left-radius: 0.5rem;
         border-top-right-radius: 0.5rem;
@@ -50,8 +50,9 @@
     }
 
     .selected {
-        color: var(--color-sel);
-        border: 1px solid var(--color-text);
+        color: var(--color-txt-sel);
+        background-color: var(--color-bg-sel);
+        border: 1px solid var(--color-txt);
         border-bottom: 0;
     }
 

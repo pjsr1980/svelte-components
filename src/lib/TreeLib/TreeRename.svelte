@@ -64,8 +64,10 @@
 <style>
     input {
         width: 100%;
-        color: var(--color-txt-selected);
-        background-color: var(--color-bg-selected);
-        font-size: calc(0.85 * var(--text-size));
+        margin: 0 10px 0 0;
+        color: var(--color-txt-sel);
+        border: 1px solid var(--color-txt-sel);
+        background-color: var(--color-bg-sel);
+        font-size: calc(0.85 * var(--txt-size));
     }
 </style>

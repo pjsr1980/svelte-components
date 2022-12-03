@@ -13,53 +13,50 @@ export enum NodeType {
 
 // NodeBase
 export interface NodeBase {
-    nid: string,
-    type: NodeType,
-    parent: NodeBase | null,
-    visible: boolean | string
+    nid: string;
+    type: NodeType;
+    data?: any;
+    parent: NodeBase | null;
+    visible: boolean | string;
 }
 
 // NodeProp
 export interface NodeProp extends NodeBase {
-    type: NodeType.PROP,
-    name: string,
-    kind: string,
-    props: NodeProp[],
-    expanded: boolean
+    type: NodeType.PROP;
+    kind: string;
+    props: NodeProp[];
+    update?() : void;
 }
 
 // NodeField
 export interface NodeField extends NodeBase {
-    type: NodeType.FIELD,
-    name: string,
-    kind: string,
-    files: NodeFile[],
-    childs: NodeField[],
-    expanded: boolean,
-    prop: NodeProp | null
+    type: NodeType.FIELD;
+    name: string;
+    kind: string;
+    prop: NodeProp;
+    files: NodeFile[];
+    childs: NodeField[];
+    expanded: boolean;
 }
 
 // NodeFile
 export interface NodeFile extends NodeBase {
-    type: NodeType.FILE,
-    name: string,
-    kind: string,
-    data: string | null,
-    edit: { 
-        modified?: boolean
-    },
-    prop: NodeProp | null
+    type: NodeType.FILE;
+    name: string;
+    kind: string;
+    prop: NodeProp;
+    edit?: any;
 }
 
 // NodeRoot
 export interface NodeRoot extends NodeBase {
-    type: NodeType.ROOT,
-    files: NodeFile[],
-    childs: NodeField[],
-    prop: NodeProp | null
+    type: NodeType.ROOT;
+    prop: NodeProp;
+    files: NodeFile[];
+    childs: NodeField[];
 
-    getItemIcon(item: NodeBase | null) : string,
-    getItemMenu(item: NodeBase | null) : MenuItem[] | null
+    getItemIcon(item: NodeBase | null) : string;
+    getItemMenu(item: NodeBase | null) : MenuItem[] | null;
 }
 
 export interface MenuItem {
@@ -81,8 +78,7 @@ function newNode(type: NodeType) : NodeBase {
 }
 
 export function newProp(
-    parent: NodeBase|null, 
-    name: string, 
+    parent: NodeBase|null,  
     kind: string, 
     props?: NodeProp[]
 ) : NodeProp {
@@ -90,10 +86,8 @@ export function newProp(
         props = [];
     }
     let nd: NodeProp = newNode(NodeType.PROP) as NodeProp;
-    nd.name = name;
     nd.kind = kind;
     nd.props = props;
-    nd.expanded = true;
     if(parent) {
         addItem(parent, nd);
     }
@@ -111,11 +105,8 @@ export function newFile(
     let nd : NodeFile = newNode(NodeType.FILE) as NodeFile;
     nd.name = name;
     nd.kind = kind;
-    nd.data = null;
-    nd.edit = { 
-        modified: false 
-    };
-    nd.prop = null;
+    nd.prop = newProp(null, "");
+    nd.prop.parent = nd;
     if(parent) {
         addItem(parent, nd);
     }
@@ -141,6 +132,8 @@ export function newField(
     nd.childs = childs;
     nd.files = files;
     nd.expanded = true;
+    nd.prop = newProp(null, "");
+    nd.prop.parent = nd;
     childs.forEach((child) => { child.parent = nd; });
     files.forEach((file) => { file.parent = nd; });
     if(parent) { 
@@ -162,7 +155,8 @@ export function newRoot(
     let nd: NodeRoot = newNode(NodeType.ROOT) as NodeRoot;
     nd.childs = childs;
     nd.files = files;
-    nd.prop = null;
+    nd.prop = newProp(null, "");
+    nd.prop.parent = nd;
     childs.forEach((child) => { child.parent = nd; });
     files.forEach((file) => { file.parent = nd; });
 
@@ -322,5 +316,6 @@ export function removeItem(parent: NodeBase, item: NodeBase) : void
         }
     }
 }
+
 //=========================================================
 //=========================================================

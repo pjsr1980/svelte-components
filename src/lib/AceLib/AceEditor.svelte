@@ -212,7 +212,6 @@
 
         editor.on("paste", function(evt) {
             dispatch("paste", evt);
-            console.log("paste", evt);
         });
 
         editor.on("blur", function(e) { 

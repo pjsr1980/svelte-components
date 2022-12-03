@@ -21,7 +21,7 @@
         on:contextmenu|preventDefault|stopPropagation="{()=>{}}">
         <div>
             {#if item.icon}
-                <Icon name="{item.icon}" size="calc(1.2 * var(--text-size))"/>
+                <Icon name="{item.icon}" size="calc(1.2 * var(--txt-size))"/>
             {/if}
         </div>
         <span>{item.text}</span>
@@ -41,7 +41,7 @@
         padding: 0;
         margin: 1px 1px;
         color: var(--color-txt);
-        background-color: var(--color-bg-sel);
+        background-color: var(--color-bg);
 
     }
 
@@ -50,8 +50,8 @@
         padding: 0;
         height: 1px;
         width: 100%;
-        background-color: var(--color-bg-sel);
-        border-bottom: 1px solid var(--color-txt);
+        background-color: var(--color-bg);
+        border-bottom: 2px solid var(--color-bg-sel);
     }
 
     .item {
@@ -63,24 +63,24 @@
         margin-right: 3px;
         cursor: pointer;
         color: var(--color-txt);
-        background-color: var(--color-bg-sel);
+        background-color: var(--color-bg);
     }
 
     .item:hover {
-        color: var(--color-txt-sel);
-        background-color: var(--color-bg-sel);
+        color: var(--color-hover);
+        background-color: var(--color-bg);
     }
 
     .item span {
         margin-left: 3px;
-        font-size: calc(0.95 * var(--text-size));
+        font-size: calc(0.95 * var(--txt-size));
     }
 
     .item div {
         margin: 0;
         padding: 0;
-        width: calc(1.3 * var(--text-size));
-        height: calc(1.3 * var(--text-size));
+        width: calc(1.3 * var(--txt-size));
+        height: calc(1.3 * var(--txt-size));
         display: inline-flex;
         align-items: center;
         /*border-right: 1px solid var(--color-txt);*/

@@ -11,8 +11,8 @@
         flex-direction: row;
         flex-shrink: 0;
         min-block-size: fit-content;
-        border-bottom: 1px solid var(--color-text);
-        background-color: transparent;
+        border-bottom: 1px solid var(--color-txt);
+        background-color: var(--color-bg);
         
         white-space: nowrap;
         overflow-x: auto;

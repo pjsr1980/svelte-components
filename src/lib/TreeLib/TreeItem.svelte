@@ -80,7 +80,7 @@
         on:keydown={()=>{}}
     >
         <div on:click|stopPropagation={on_icon_click} on:keydown={()=>{}}>
-            <Icon name={icon} size="calc(1.2 * var(--text-size))" />
+            <Icon name={icon} size="calc(1.2 * var(--txt-size))" />
         </div>
 
         {#if isRename}
@@ -166,7 +166,6 @@
         align-items: center;
         cursor: default;
         color: var(--color-txt);
-        background-color: var(--color-txt-bg);
 
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -189,7 +188,7 @@
     }
 
     .tree-item span {
-        font-size: var(--text-size);
+        font-size: var(--txt-size);
         text-overflow: ellipsis;
         white-space: nowrap;
         width: available;
@@ -213,6 +212,7 @@
     .tree-item-marked {
         color: var(--color-txt-marked);
         background-color: var(--color-bg-marked);
+        filter: invert(0.05);
     }
 
     ul {

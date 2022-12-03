@@ -15,6 +15,9 @@ import Splitter from "./SplitterLib/Splitter.svelte";
 import * as TreeNode from "./TreeLib/TreeNode";
 import TreeCtrl from "./TreeLib/TreeCtrl.svelte";
 
+import * as PropNode from "./PropLib/PropNode";
+import PropCtrl from "./PropLib/PropCtrl.svelte";
+
 import Markdown from "./MarkdownLib/Markdown.svelte";
 
 //=========================================================
@@ -33,6 +36,9 @@ export { Splitter }
 
 export { TreeNode }
 export { TreeCtrl }
+
+export { PropNode }
+export { PropCtrl }
 
 export { Markdown }
 
