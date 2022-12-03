@@ -107,6 +107,13 @@ export function newFile(
     nd.kind = kind;
     nd.prop = newProp(null, "");
     nd.prop.parent = nd;
+    nd.prop.update = () => { 
+        nd.prop.props.forEach((prop) => {
+            if(typeof prop.update === "function") {
+                prop.update();
+            }
+        }
+    )}
     if(parent) {
         addItem(parent, nd);
     }
@@ -134,6 +141,13 @@ export function newField(
     nd.expanded = true;
     nd.prop = newProp(null, "");
     nd.prop.parent = nd;
+    nd.prop.update = () => { 
+        nd.prop.props.forEach((prop) => {
+            if(typeof prop.update === "function") {
+                prop.update();
+            }
+        }
+    )}
     childs.forEach((child) => { child.parent = nd; });
     files.forEach((file) => { file.parent = nd; });
     if(parent) { 
@@ -157,6 +171,13 @@ export function newRoot(
     nd.files = files;
     nd.prop = newProp(null, "");
     nd.prop.parent = nd;
+    nd.prop.update = () => { 
+        nd.prop.props.forEach((prop) => {
+            if(typeof prop.update === "function") {
+                prop.update();
+            }
+        }
+    )}
     childs.forEach((child) => { child.parent = nd; });
     files.forEach((file) => { file.parent = nd; });
 
