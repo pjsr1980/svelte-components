@@ -1,6 +1,7 @@
 {
 	"name": "@pjsr/svelte-components",
-	"version": "0.0.1",
+	"version": "0.0.2",
+	"description": "Some svelte components",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "svelte-kit sync && svelte-package",
