@@ -1,13 +1,15 @@
 
 <script lang="ts">
-    import Splitter from "$lib/SplitterLib/Splitter.svelte";
-    import TabExample from "$lib/TabLib/TabExample.svelte";
-    import AceEditor from "$lib/AceLib/AceEditor.svelte";
-    import Icon from "$lib/IconLib/Icon.svelte";
-
-    import { TreeNode, TreeCtrl, Markdown,
-        TabCtrl, TabHeader, TabName, TabPane,
-        PropNode, PropCtrl } from "$lib";
+    
+    import { 
+        Icon, 
+        Splitter, 
+        Markdown,
+        AceEditor,
+        TreeNode, TreeCtrl, 
+        PropNode, PropCtrl,
+        TabCtrl, TabHeader, TabName, TabPane
+    } from "$lib";
 
     import type { MenuItem, NodeBase, NodeProp } from "$lib/TreeLib/TreeNode";
  
@@ -221,7 +223,7 @@ This is an example of how to create a footnote[^1] in Markdown.
         sepColor={theme.colorBgSel}
         sepHover={theme.colorHover}
     >
-        <Splitter slot="1" isVertical={!isVertical} isSwap={false}
+        <Splitter slot="1" isVertical={!isVertical} isSwap={false} 
             sepColor={theme.colorBgSel}
             sepHover={theme.colorHover}
         >
@@ -265,7 +267,7 @@ This is an example of how to create a footnote[^1] in Markdown.
                     bind:this={editor}
                     bind:value={value} 
                     options={options}
-                    theme={theme.name} 
+                    theme= {theme.name} 
                 />
             </TabPane>
         </TabCtrl>

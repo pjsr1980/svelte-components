@@ -30,5 +30,9 @@
 		"components"
 	],
 	"author": "Pedro Ribeiro (pjsr1980@gmail.com)",
-	"license": "ISC"
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pjsr1980/svelte-components.git"
+	}
 }
