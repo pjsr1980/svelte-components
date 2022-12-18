@@ -179,7 +179,7 @@ events:
             on:mouseleave={()=>{_title_hover=false}}>
             <slot name="title">
                 <div>
-                    <Icon name="database" size="calc(1.15 * var(--text-size))"/>
+                    <Icon name="database" size="calc(1.3 * var(--text-size))"/>
                     <span class="title-text">{title}</span>
                 </div>
                 <div class="title-menu">
@@ -246,7 +246,7 @@ events:
         display: flex;
         margin: 0;
         padding: calc(0.3 * var(--txt-size));
-        height: calc(1.2 * var(--txt-size));
+        height: calc(1.8 * var(--txt-size));
         width: calc(100% - 2 * 0.3 * var(--txt-size));
         font-size: var(--text-size);
         color: var(--color-hover);
