@@ -247,7 +247,7 @@ events:
         margin: 0;
         padding: calc(0.3 * var(--txt-size));
         height: calc(1.8 * var(--txt-size));
-        width: calc(100% - 2 * 0.3 * var(--txt-size));
+        width: 100%;
         font-size: var(--text-size);
         color: var(--color-hover);
         background-color: var(--color-bg-sel);

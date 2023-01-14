@@ -56,7 +56,7 @@
     }
 
     .left {
-        width: 35%;
+        width: 45%;
         color: var(--color-txt);
         font-size: var(--txt-size);
         text-overflow: ellipsis;
@@ -77,7 +77,7 @@
     }
 
     .right {
-        width: 65%;
+        width: 55%;
     }
 
     .right select {
