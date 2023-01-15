@@ -18,6 +18,8 @@ export interface NodeBase {
     data?: any;
     parent: NodeBase | null;
     visible: boolean | string;
+    getIcon?: () => string;
+    getMenu?: () => MenuItem[] | null;
 }
 
 // NodeProp
@@ -33,7 +35,7 @@ export interface NodeField extends NodeBase {
     type: NodeType.FIELD;
     name: string;
     kind: string;
-    prop: NodeProp;
+    prop?: NodeProp;
     files: NodeFile[];
     childs: NodeField[];
     expanded: boolean;
@@ -44,14 +46,14 @@ export interface NodeFile extends NodeBase {
     type: NodeType.FILE;
     name: string;
     kind: string;
-    prop: NodeProp;
+    prop?: NodeProp;
     edit?: any;
 }
 
 // NodeRoot
 export interface NodeRoot extends NodeBase {
     type: NodeType.ROOT;
-    prop: NodeProp;
+    prop?: NodeProp;
     files: NodeFile[];
     childs: NodeField[];
 
@@ -108,7 +110,7 @@ export function newFile(
     nd.prop = newProp(null, "");
     nd.prop.parent = nd;
     nd.prop.update = () => { 
-        nd.prop.props.forEach((prop) => {
+        (nd.prop as NodeProp).props.forEach((prop) => {
             if(typeof prop.update === "function") {
                 prop.update();
             }
@@ -142,7 +144,7 @@ export function newField(
     nd.prop = newProp(null, "");
     nd.prop.parent = nd;
     nd.prop.update = () => { 
-        nd.prop.props.forEach((prop) => {
+        (nd.prop as NodeProp).props.forEach((prop) => {
             if(typeof prop.update === "function") {
                 prop.update();
             }
@@ -172,7 +174,7 @@ export function newRoot(
     nd.prop = newProp(null, "");
     nd.prop.parent = nd;
     nd.prop.update = () => { 
-        nd.prop.props.forEach((prop) => {
+        (nd.prop as NodeProp).props.forEach((prop) => {
             if(typeof prop.update === "function") {
                 prop.update();
             }
@@ -285,7 +287,7 @@ export function removeItem(parent: NodeBase, item: NodeBase) : void
             case NodeType.FILE:
             if(item.parent === parent) {
                 item.parent = null;
-                (parent as NodeFile).prop = null;
+                (parent as NodeFile).prop = undefined;
             }
             break;
 
@@ -301,7 +303,7 @@ export function removeItem(parent: NodeBase, item: NodeBase) : void
             if(parent === item.parent) {
                 if(item.type === NodeType.PROP) {
                     item.parent = null;
-                    (parent as NodeField).prop = null;
+                    (parent as NodeField).prop = undefined;
                 }
                 else if(item.type === NodeType.FIELD) {
                     if((parent as NodeField).childs.splice((parent as NodeField).childs.indexOf(item as NodeField), 1).length > 0) {
@@ -330,7 +332,7 @@ export function removeItem(parent: NodeBase, item: NodeBase) : void
                 }
                 else if(item.type === NodeType.PROP) {
                     item.parent = null;
-                    (parent as NodeRoot).prop = null;
+                    (parent as NodeRoot).prop = undefined;
                 }
             }
             break;
