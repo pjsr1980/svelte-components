@@ -36,8 +36,8 @@
         z-index: 100;
         position: absolute;
         width: fit-content;
-        background-color: var(--color-bg);
-        border: 2px solid var(--color-bg-sel);
+        background-color: var(--color-bg-sel);
+        border: 2px solid var(--color-txt-sel);
     }
 
     ul {

@@ -244,8 +244,9 @@ events:
 
     .title {
         display: flex;
+        align-items: center;
         margin: 0;
-        padding: calc(0.3 * var(--txt-size));
+        padding: calc(0.15 * var(--txt-size));
         height: calc(1.8 * var(--txt-size));
         width: 100%;
         font-size: var(--text-size);
