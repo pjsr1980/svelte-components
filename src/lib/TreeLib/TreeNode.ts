@@ -15,11 +15,13 @@ export enum NodeType {
 export interface NodeBase {
     nid: string;
     type: NodeType;
-    data?: any;
     parent: NodeBase | null;
     visible: boolean | string;
     getIcon?: () => string;
     getMenu?: () => MenuItem[] | null;
+    onCommand?: (cmd: string) => void;
+    onIconClick?: () => void;
+    onDClick?: () => void;
 }
 
 // NodeProp

@@ -36,9 +36,10 @@
 <style>
     .pane {
         margin: 0;
-        padding: calc(0.3 * var(--txt-size));
-        width: calc(100% - 2 * 0.3 * var(--txt-size));
-        height: calc(100% - 2 * 0.3 * var(--txt-size));
+        padding: calc(0.1 * var(--txt-size));
+        padding-right: 0;
+        width: calc(100% - 2 * 0.1 * var(--txt-size));
+        height: calc(100% - 2 * 0.1 * var(--txt-size));
         overflow: auto;
         background-color: var(--color-bg);
     }

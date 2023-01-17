@@ -57,8 +57,9 @@
 
     .header {
         margin: 0;
-        padding: calc(0.3 * var(--txt-size));
-        width: calc(100% - 2 * 0.3 * var(--txt-size));
+        padding: calc(0.1 * var(--txt-size));
+        padding-right: 0;
+        width: calc(100% - 0.1 * var(--txt-size));
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -72,7 +73,7 @@
 
     .title {
         font-weight: bold;
-        font-size: calc(1 * var(--txt-size));
+        font-size: var(--txt-size);
         padding: 0;
         color: var(--color-txt-sel);
         text-overflow: ellipsis;
@@ -81,7 +82,7 @@
 
     .icon {
         padding: 0;
-        font-size: calc(1.0 * var(--txt-size));
+        font-size: var(--txt-size);
         color: var(--color-txt-sel);
         cursor: pointer;
     }
@@ -93,7 +94,8 @@
     .content {
         margin: 0;
         background-color: var(--color-bg);
-        padding: calc(0.3 * var(--txt-size));
+        padding: calc(0.1 * var(--txt-size));
         padding-left: calc(0.5 * var(--txt-size));
+        padding-right: 0;
     }
 </style>
