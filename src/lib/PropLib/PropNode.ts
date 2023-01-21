@@ -46,7 +46,7 @@ export interface NodePropInput extends NodeProp {
     name: string;
     args: InputArgs;
     getValue() : any;
-    onValue(value: any) : void;
+    onValue?(value: any) : void;
 }
 
 //=========================================================
@@ -88,7 +88,7 @@ export function newPropInput(
     name: string,
     args: InputArgs,
     getValue: () => any,
-    onValue: (val: any) => void
+    onValue?: (val: any) => void
 ) : NodePropInput
 {
     let nd: NodePropInput = newProp(parent, "input") as NodePropInput;

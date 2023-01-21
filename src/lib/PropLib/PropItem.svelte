@@ -17,10 +17,12 @@
 </script>
 
 <!-- Elemets -->
-{#if group}
-    <PropGroup prop={group} />
-{:else if input}
-    <PropInput prop={input} />
-{:else if select}
-    <PropSelect prop={select} />
+{#if prop.visible}
+    {#if group}
+        <PropGroup prop={group} />
+    {:else if input}
+        <PropInput prop={input} />
+    {:else if select}
+        <PropSelect prop={select} />
+    {/if}
 {/if}

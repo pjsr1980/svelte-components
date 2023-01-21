@@ -17,21 +17,23 @@
     })
 
     function on_change(e: Event) {
-        let target = e.target as HTMLInputElement;
-        if(is_text || is_pwd || is_mail || is_color || 
-           is_time || is_url) {
-            prop.onValue(target.value);
+        if(prop.onValue) {
+            let target = e.target as HTMLInputElement;
+            if(is_text || is_pwd || is_mail || is_color || 
+            is_time || is_url) {
+                prop.onValue(target.value);
+            }
+            else if(is_number || is_range) {
+                prop.onValue(+target.value);
+            }
+            else if(is_check || is_radio) {
+                prop.onValue(target.checked);
+            }
+            else if(is_date || is_month || is_week) {
+                prop.onValue(target.value);
+            }
+            get_value();
         }
-        else if(is_number || is_range) {
-            prop.onValue(+target.value);
-        }
-        else if(is_check || is_radio) {
-            prop.onValue(target.checked);
-        }
-        else if(is_date || is_month || is_week) {
-            prop.onValue(target.value);
-        }
-        get_value();
     }
 
     function get_value() {

@@ -32,7 +32,7 @@
 <style>
     div {
         margin: 0;
-        padding: 2px;
+        padding: 1px;
         z-index: 100;
         position: absolute;
         width: fit-content;

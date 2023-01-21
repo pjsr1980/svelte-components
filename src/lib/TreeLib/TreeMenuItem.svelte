@@ -50,8 +50,8 @@
         padding: 0;
         height: 1px;
         width: 100%;
-        background-color: var(--color-bg);
-        border-bottom: 2px solid var(--color-bg-sel);
+        background-color: var(--color-bg-sel);
+        border-bottom: 1px solid var(--color-txt-sel);
     }
 
     .item {
@@ -63,12 +63,12 @@
         margin-right: 3px;
         cursor: pointer;
         color: var(--color-txt);
-        background-color: var(--color-bg);
+        background-color: var(--color-bg-sel);
     }
 
     .item:hover {
         color: var(--color-hover);
-        background-color: var(--color-bg);
+        background-color: var(--color-bg-sel);
     }
 
     .item span {
@@ -83,6 +83,6 @@
         height: calc(1.3 * var(--txt-size));
         display: inline-flex;
         align-items: center;
-        /*border-right: 1px solid var(--color-txt);*/
+        /*border-right: 1px solid var(--color-txt-sel);*/
     }
 </style>
