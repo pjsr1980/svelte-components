@@ -25,7 +25,7 @@
 
 <!-- Elemets -->
 <div class="pane" style={css_variables}>
-    {#if prop}
+    {#if prop && prop.visible}
         {#each prop.props as item (item.nid) }
             <PropItem prop={item} />
         {/each}
