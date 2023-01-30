@@ -42,7 +42,6 @@ events:
     export const getSelectedItem = function() { return _selectedItem; }
     export const getMarkedItems  = function() { return _markedItems; }
     export const getRenameItem   = function() { return _renameItem; }
-    //export const getVariables    = function() { return _variables; }
     export const getTreeMenu     = function() { return _treeMenu; }
     export const updateTree      = function() {
         if(root) {

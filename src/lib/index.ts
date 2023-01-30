@@ -1,5 +1,6 @@
 //=========================================================
 import Icon from "./IconLib/Icon.svelte";
+import IconSvg from "./IconLib/IconSvg.svelte";
 
 import AceEditor from "./AceLib/AceEditor.svelte";
 import { AceThemes } from "./AceLib/AceThemes";
@@ -22,6 +23,7 @@ import Markdown from "./MarkdownLib/Markdown.svelte";
 
 //=========================================================
 export { Icon }
+export { IconSvg }
 
 export { AceEditor }
 export { AceThemes }

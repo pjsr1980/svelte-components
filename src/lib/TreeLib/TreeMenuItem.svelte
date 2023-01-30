@@ -1,6 +1,7 @@
 <!-- Script -->
 <script lang="ts">
     import Icon from "../IconLib/Icon.svelte";
+    import IconSvg from "../IconLib/IconSvg.svelte";
     import type { MenuItem } from './TreeNode';
     import { createEventDispatcher } from 'svelte';
 
@@ -21,7 +22,16 @@
         on:contextmenu|preventDefault|stopPropagation="{()=>{}}">
         <div>
             {#if item.icon}
-                <Icon name="{item.icon}" size="calc(1.2 * var(--txt-size))"/>
+                {#if typeof item.icon === "string"}
+                    <Icon name="{item.icon}" size="calc(1.2 * var(--txt-size))"/>
+                {:else}
+                    <IconSvg 
+                        data={item.icon.data} 
+                        size={item.icon.size}
+                        color="currentColor"
+                        fill="transparent"
+                    />
+                {/if}
             {/if}
         </div>
         <span>{item.text}</span>

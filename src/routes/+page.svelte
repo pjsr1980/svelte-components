@@ -12,6 +12,8 @@
     } from "$lib";
 
     import type { MenuItem, NodeBase, NodeProp } from "$lib/TreeLib/TreeNode";
+
+    import icon1 from "../icons/icon1.svg?raw";
  
     let isSwap = false;
     let isVertical = false;
@@ -45,11 +47,11 @@
             prop = evt.detail.newItem.prop;
         }
         else {
-            prop = root.prop;
+            prop = root.prop as NodeProp;
         }
     }
     let root = TreeNode.newRoot();
-    let prop : NodeProp = root.prop;
+    let prop : NodeProp = root.prop as NodeProp;
     prop.data = {
         "text": "texto",
         "password": "123",
@@ -126,9 +128,7 @@
         nome: "1",
         options: [
             {name: "Pedro",     value: "1"},
-            {name: "Joaquim",   value: "2"},
-            {name: "Santos",    value: "3"},
-            {name: "Ribeiro",   value: "4"},
+            {name: "Ribeiro",   value: "2"},
         ]
     }
 
@@ -162,6 +162,20 @@
 
         ];
         return r;
+    }
+    root.getItemIcon = (item: NodeBase | null) => {
+        let icon : string | TreeNode.IconSvg = "";
+        if(item) {
+            switch(item.type) {
+                case TreeNode.NodeType.FILE: 
+                    icon = { data: icon1, size: "24px" }; // "description";
+                    break;
+                case TreeNode.NodeType.FIELD:
+                    icon = (item as TreeNode.NodeField).expanded ? "folder_open" : "folder";
+                    break;
+            }
+        }
+        return icon;
     }
 
     let text = `## Olá Mundo!

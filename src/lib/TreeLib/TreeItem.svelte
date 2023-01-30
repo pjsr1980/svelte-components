@@ -2,8 +2,9 @@
 <script lang="ts">
     import { createEventDispatcher, getContext } from "svelte";
     import { slide } from "svelte/transition";
-    import Icon from "../IconLib/Icon.svelte";
     import TreeRename from "./TreeRename.svelte";
+    import IconSvg from "../IconLib/IconSvg.svelte";
+    import Icon from "../IconLib/Icon.svelte";
 
     import type { NodeField, NodeFile } from "./TreeNode";
     import type { TreeContext } from "./TreeCtrl.svelte";
@@ -80,7 +81,16 @@
         on:keydown={()=>{}}
     >
         <div on:click|stopPropagation={on_icon_click} on:keydown={()=>{}}>
-            <Icon name={icon} size="calc(1.2 * var(--txt-size))" />
+            {#if typeof icon === "string"}
+                <Icon name={icon} size="calc(1.2 * var(--txt-size))" />
+            {:else}
+                <IconSvg 
+                    data={icon.data} 
+                    size={icon.size}
+                    color="currentColor"
+                    fill="transparent"
+                />
+            {/if}
         </div>
 
         {#if isRename}
