@@ -29,7 +29,7 @@
                         data={item.icon.data} 
                         size={item.icon.size}
                         color="currentColor"
-                        fill="transparent"
+                        fill={item.icon.color ? item.icon.color : "transparent"}
                     />
                 {/if}
             {/if}

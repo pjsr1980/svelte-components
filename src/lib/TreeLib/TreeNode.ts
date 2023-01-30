@@ -11,9 +11,10 @@ export enum NodeType {
     PROP  = 5
 }
 
-export interface IconSvg {
+export interface IconSVG {
     data: string;
     size: string;
+    color?: string;
 }
 
 // NodeBase
@@ -22,7 +23,7 @@ export interface NodeBase {
     type: NodeType;
     parent: NodeBase | null;
     visible: boolean | string;
-    getIcon?: () => string | IconSvg;
+    getIcon?: () => string | IconSVG;
     getMenu?: () => MenuItem[] | null;
     onCommand?: (cmd: string) => void;
     onIconClick?: () => void;
@@ -64,12 +65,12 @@ export interface NodeRoot extends NodeBase {
     files: NodeFile[];
     childs: NodeField[];
 
-    getItemIcon(item: NodeBase | null) : string | IconSvg;
+    getItemIcon(item: NodeBase | null) : string | IconSVG;
     getItemMenu(item: NodeBase | null) : MenuItem[] | null;
 }
 
 export interface MenuItem {
-    icon?: string | IconSvg,
+    icon?: string | IconSVG,
     text: string,
     cmd?: string
 }

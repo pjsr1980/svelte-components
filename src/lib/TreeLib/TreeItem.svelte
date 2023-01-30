@@ -88,7 +88,7 @@
                     data={icon.data} 
                     size={icon.size}
                     color="currentColor"
-                    fill="transparent"
+                    fill={icon.color ? icon.color : "transparent"}
                 />
             {/if}
         </div>
